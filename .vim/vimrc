@@ -1,1 +1,77 @@
-/root/.vim/vimrc
+syntax on
+set number
+set showcmd
+set wildmenu
+set clipboard=unnamedplus
+set clipboard=unnamed
+
+" hight light
+set cursorline
+highlight NERDTreeFile ctermfg=14
+
+
+" color
+set termguicolors
+set t_Co=256
+set background=dark
+
+nmap <CR> o<Esc>
+inoremap jk <Esc>
+let mapleader = ' '
+
+
+map <silent> <C-e> :NERDTreeToggle<CR>
+
+"coc 
+let g:coc_global_extensions = ['coc-clangd',
+			\ 'coc-pyright',
+			\ 'coc-python',
+			\ 'coc-json',
+			\ 'coc-vimlsp']
+set updatetime=100
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" coc end
+
+
+" nerdcommenter 
+
+
+" nerdcommenter end
+
+
+call plug#begin()
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'neoclide/coc.nvim'
+
+Plug 'jiangmiao/auto-pairs'
+
+call plug#end()
+
