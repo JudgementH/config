@@ -41,3 +41,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Or build from source code by using yarn: https://yarnpkg.com
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 ```
+
+and then install \& build coc.nvim
+```
+sudo npm install -g yarn
+cd ~/.vim/plugged/coc.nvim/	
+yarn install
+yarn build
+```
+
+
