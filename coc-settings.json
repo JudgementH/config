@@ -1,0 +1,6 @@
+{
+    "suggest.noselect": true,
+    "suggest.enablePreselect": false,
+    "codeLens.enable": true,
+    "ccoc.preferences.formatOnSave": true,
+}

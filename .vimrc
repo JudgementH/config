@@ -25,7 +25,7 @@ set ignorecase          " 搜索时大小写不敏感
 nnoremap <silent> <esc> :noh<return><esc>
 
 " typesetting
-set autoindent 
+set autoindent
 set smartindent
 set smarttab
 set expandtab
@@ -34,6 +34,7 @@ set shiftwidth=4
 set softtabstop=4
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set list
+
 
 " code
 syntax on
@@ -60,23 +61,29 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'voldikss/vim-floaterm'
 call plug#end()
 
+
 " theme
 colorscheme dracula
 set t_Co=256
 set background=dark
 set cursorline
 highlight NERDTreeFile ctermfg=14
-
-" keymap
+"
+" kpeymap
 nmap <CR> o<Esc>
 inoremap jk <Esc>
 let mapleader = ' '
 nnoremap <leader>s :source $MYVIMRC<cr>
+nmap <C-s> :w<CR>
+nmap <C-[> :bnext<CR>
+nmap <C-]> :bprevious<CR>
+nmap <C-w> :bd<CR>
+
 " 分屏窗口移动
-nnoremap <M-j> <c-w>j
-nnoremap <M-k> <c-w>k
-nnoremap <M-h> <c-w>h
-nnoremap <M-l> <c-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 
 
@@ -104,7 +111,7 @@ let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'"
 " airline end
 
-" nerdcommenter 
+" nerdcommenter
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle
 let g:NERDCreateDefaultMappings = 1
@@ -119,18 +126,26 @@ let g:NERDToggleCheckAllLines = 1
 " nerdcommenter end
 
 
-"coc 
+"coc
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = ['coc-clangd',
-			\ 'coc-pyright',
-			\ 'coc-python',
-			\ 'coc-json',
-			\ 'coc-vimlsp']
+            \ 'coc-sh',
+            \ 'coc-jedi',
+            \ 'coc-pyright',
+            \ 'coc-python',
+            \ 'coc-json',
+            \ 'coc-vimlsp']
 set updatetime=100
 
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<S-TAB>"
+
 " Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
@@ -149,7 +164,11 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 " coc end
+
 
 " floaterm
 noremap <leader>t :call FloatTerm()<CR>
@@ -159,4 +178,5 @@ function FloatTerm()
     :w
     :FloatermToggle
 endfunction
+" floaterm end
 
