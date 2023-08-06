@@ -67,7 +67,6 @@ colorscheme dracula
 set t_Co=256
 set background=dark
 set cursorline
-highlight NERDTreeFile ctermfg=14
 "
 " kpeymap
 nmap <CR> o<Esc>
@@ -88,6 +87,7 @@ nnoremap <C-l> <C-w>l
 
 
 " nerdtree
+highlight NERDTreeFile ctermfg=14
 map <silent> <leader>e :NERDTreeToggle<CR>
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
@@ -129,9 +129,7 @@ let g:NERDToggleCheckAllLines = 1
 "coc
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = ['coc-clangd',
-            \ 'coc-sh',
             \ 'coc-jedi',
-            \ 'coc-pyright',
             \ 'coc-python',
             \ 'coc-json',
             \ 'coc-vimlsp']
