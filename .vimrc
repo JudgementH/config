@@ -56,14 +56,16 @@ Plug 'neoclide/coc.nvim'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'ryanoasis/vim-devicons'
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'doums/darcula'
 
 Plug 'voldikss/vim-floaterm'
 call plug#end()
 
 
 " theme
-colorscheme dracula
+" colorscheme dracula
+colorscheme darcula
 set t_Co=256
 set background=dark
 set cursorline
