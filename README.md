@@ -1,6 +1,10 @@
 # config
 the personal config
 
+Unix
+```
+git clone https://github.com/JudgementH/config.git ~/.judgement-config
+```
 
 # .vim
 
