@@ -1,7 +1,0 @@
-{
-    "suggest.noselect": true,
-    "suggest.enablePreselect": false,
-    "codeLens.enable": true,
-    "coc.preferences.formatOnSave": true,
-    "python.formatting.provider": "black"
-}
