@@ -127,8 +127,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 #
-export HTTP_PROXY='http://127.0.0.1:17890'
-export HTTPS_PROXY='http://127.0.0.1:17890'
-export ALL_PROXY='http://127.0.0.1:17890'
+export HTTP_PROXY='http://10.19.110.141:17890'
+export HTTPS_PROXY='http://10.19.110.141:17890'
+export ALL_PROXY='http://10.19.110.141:17890'
 export NO_PROXY=localhost,127.0.0.1
 
