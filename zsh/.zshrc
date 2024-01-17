@@ -136,8 +136,55 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 #
-export HTTP_PROXY='http://10.19.110.141:17890'
-export HTTPS_PROXY='http://10.19.110.141:17890'
-export ALL_PROXY='http://10.19.110.141:17890'
-export NO_PROXY=localhost,127.0.0.1
+local proxy="10.19.110.141:17890"
+function proxy_on() {
+    export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+    if (( $# > 0 )); then
+        valid=$(echo $@ | sed -n 's/\([0-9]\{1,3\}.\?\)\{4\}:\([0-9]\+\)/&/p')
+        if [[ $valid != $@ ]]; then
+            >&2 echo "Invalid address"
+            return 1
+        fi
+        local proxy=$1
+        export http_proxy="$proxy" \
+               https_proxy=$proxy \
+        echo "Proxy environment variable set."
+        return 0
+    fi
 
+    if [ -z ${no_proxy+x} ] ;
+    then
+    	echo -n "Input server: "; read server
+    	echo -n "Input port: "; read port
+    	#echo -n "Input server:port like 192.168.123.123 : ";  read server_port
+    	#server=$(echo ${server_port} | grep -Po '((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}')
+    	#port=$(echo ${server_port} | grep -Po '(?<=:)[\d]{1,5}')
+    	local proxy=$server:$port
+    fi 
+
+    echo -e "Proxy environment variable seted."
+    echo "proxy=$proxy"
+    export http_proxy="$proxy" \
+           https_proxy=$proxy \
+           HTTP_PROXY=$proxy \
+           HTTPS_PROXY=$proxy 
+}
+function proxy_off(){
+    unset http_proxy https_proxy ftp_proxy rsync_proxy \
+          HTTP_PROXY HTTPS_PROXY FTP_PROXY RSYNC_PROXY
+    echo -e "Proxy environment variable removed."
+}
+function proxy_status(){
+    if [ -z ${http_proxy+x} ] && [ -z ${https_proxy+x} ] ;
+    then
+    	echo -e "No Proxy environment."
+    else
+    	echo -e "Have Proxy environment."
+    fi 
+    echo -e "http_proxy: ${http_proxy}"
+    echo -e "https_proxy: ${https_proxy}"
+    echo -e "ftp_proxy: ${ftp_proxy}"
+    echo -e "rsync_proxy: ${rsync_proxy}"
+}
+
+alias vim='bash -c '\''my_vim=""; if command -v lvim >/dev/null 2>&1; then my_vim="lvim"; else if command -v nvim >/dev/null 2>&1; then my_vim="nvim"; else my_vim="vim"; fi; fi; if [ $# -gt 0 ]; then $my_vim "$@"; else $my_vim .; fi'\'' bash'
