@@ -53,7 +53,7 @@ vim.o.incsearch = true
 -- 使用增强状态栏后不再需要 vim 的模式提示
 vim.o.showmode = false
 -- 命令行高为2，提供足够的显示空间
-vim.o.cmdheight = 2
+vim.o.cmdheight = 1
 -- 当文件被外部程序修改时，自动加载
 vim.o.autoread = true
 vim.bo.autoread = true
@@ -71,9 +71,10 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
 -- smaller updatetime 
-vim.o.updatetime = 300
+vim.o.updatetime = 100
 -- 等待mappings
 vim.o.timeoutlen = 500
+vim.o.virtualedit = "block"
 -- split window 从下边和右边出现
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -92,5 +93,18 @@ vim.o.wildmenu = true
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.pumheight = 10
 -- always show tabline
-vim.o.showtabline = 2
-
+vim.o.showtabline = 3
+vim.o.laststatus = 3
+vim.api.nvim_create_autocmd('BufReadPost', {
+  callback = function()
+    local pos = vim.fn.getpos("'\"")
+    if pos[2] > 0 and pos[2] <= vim.fn.line('$') then
+      vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] - 1 })
+    end
+  end
+})
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
+  end
+})

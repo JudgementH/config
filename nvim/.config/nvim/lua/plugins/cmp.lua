@@ -23,6 +23,14 @@ cmp.setup({
       require('luasnip').lsp_expand(args.body)
     end,
   },
+  windows = {
+    completion = {
+            winhighligh = "Normal:Pmenu,FloatBoarder:Pmenu,Search:None",
+            border = "rounded",
+            scrollbar = true,
+        }
+
+  },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -65,7 +73,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
-  }, {
     { name = 'buffer' },
   })
 })
