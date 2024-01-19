@@ -15,4 +15,5 @@ map('n', "<C-j>", "<C-w>j", opt)
 map('n', "<C-k>", "<C-w>k", opt)
 map('n', "<C-l>", "<C-w>l", opt)
 
+map('n', "<C-s>", ":w<Esc>", opt)
 

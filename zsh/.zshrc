@@ -123,14 +123,14 @@ export TERM=xterm-256color
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/judgement/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/root/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/judgement/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/judgement/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/root/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/root/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/judgement/miniconda3/bin:$PATH"
+        export PATH="/root/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -188,3 +188,11 @@ function proxy_status(){
 }
 
 alias vim='bash -c '\''my_vim=""; if command -v lvim >/dev/null 2>&1; then my_vim="lvim"; else if command -v nvim >/dev/null 2>&1; then my_vim="nvim"; else my_vim="vim"; fi; fi; if [ $# -gt 0 ]; then $my_vim "$@"; else $my_vim .; fi'\'' bash'
+
+export HOMEBREW_INSTALL_FROM_API=1
+export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
