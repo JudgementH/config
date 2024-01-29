@@ -79,6 +79,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
+
+source ~/.bash_prof
+
 plugins=(
     git
     zsh-autosuggestions
@@ -120,17 +123,18 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export TERM=xterm-256color
+bindkey -v
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/root/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/judgement/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/root/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/root/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/judgement/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/judgement/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/root/anaconda3/bin:$PATH"
+        export PATH="/home/judgement/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -178,6 +182,9 @@ function proxy_status(){
     if [ -z ${http_proxy+x} ] && [ -z ${https_proxy+x} ] ;
     then
     	echo -e "No Proxy environment."
+
+
+
     else
     	echo -e "Have Proxy environment."
     fi 
@@ -199,4 +206,4 @@ export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebr
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
 
 
-
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
